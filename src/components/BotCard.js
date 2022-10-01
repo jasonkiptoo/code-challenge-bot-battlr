@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 const botTypeClasses = {
   Assault: "icon military",
@@ -9,13 +9,23 @@ const botTypeClasses = {
   Captain: "icon star",
 };
 
-function BotCard({ bot }) {
+function BotCard({ bot }, props) {
+  const [isOn, isOff] = useState(false);
+
+  function handleSelectBot(e) {
+    e.preventDefault();
+    console.log(bot.id);
+    props.onSelectt(bot.id);
+  }
   return (
     <div className="ui column">
+      {/* <div>{show ? <h1>Hello {bot.id}</h1> : null}</div> */}
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => console.log("add code to connect event listener")}
+        onClick={(e) => {
+          handleSelectBot(e);
+        }}
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />

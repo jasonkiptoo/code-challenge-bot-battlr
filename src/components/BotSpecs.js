@@ -5,9 +5,9 @@ const botTypeClasses = {
   Defender: "icon shield",
   Support: "icon plus circle",
   Medic: "icon ambulance",
-  Witch: "icon magic",
+  Witch: "icon magic", 
   Captain: "icon star",
-};
+}; 
 
 function BotSpecs({ bot }) {
   return (
