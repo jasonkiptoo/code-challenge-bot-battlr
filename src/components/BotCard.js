@@ -9,49 +9,47 @@ const botTypeClasses = {
   Captain: "icon star",
 };
 
-function BotCard({ bot }, props) {
-  const [isOn, isOff] = useState(false);
+function BotCard({ bot, onSubmitt }) {
+  const { id, avatar_url, bot_class, catchphrase, health, damage, armor } = bot;
 
-  function handleSelectBot(e) {
-    e.preventDefault();
-    console.log(bot.id);
-    props.onSelectt(bot.id);
+  function handleClick() {
+    onSubmitt(bot);
   }
+
   return (
     <div className="ui column">
-      {/* <div>{show ? <h1>Hello {bot.id}</h1> : null}</div> */}
       <div
         className="ui card"
-        key={bot.id}
-        onClick={(e) => {
-          handleSelectBot(e);
+        key={id}
+        onClick={() => {
+          handleClick();
         }}
       >
         <div className="image">
-          <img alt="oh no!" src={bot.avatar_url} />
+          <img alt="oh no!" src={avatar_url} />
         </div>
         <div className="content">
           <div className="header">
             {bot.name}
-            <i className={botTypeClasses[bot.bot_class]} />
+            <i className={botTypeClasses[bot_class]} />
           </div>
           <div className="meta text-wrap">
-            <small>{bot.catchphrase}</small>
+            <small>{catchphrase}</small>
           </div>
         </div>
         <div className="extra content">
           <span>
             <i className="icon heartbeat" />
-            {bot.health}
+            {health}
           </span>
 
           <span>
             <i className="icon lightning" />
-            {bot.damage}
+            {damage}
           </span>
           <span>
             <i className="icon shield" />
-            {bot.armor}
+            {armor}
           </span>
           <span>
             <div className="ui center aligned segment basic">
