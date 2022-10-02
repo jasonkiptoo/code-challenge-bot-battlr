@@ -24,19 +24,15 @@ function BotsPage() {
     // handleBot();
   }, []);
   function handleClick(data) {
-    // console.log(data);
-     setBotsDisplay(data);
+    const newBots = botsDisplay.slice();
+    newBots.push(data);
+    setBotsDisplay(newBots);
   }
 
   return (
     <div>
-      {/* <Route exact path={match.url}>
-        <h3>Choose a Bot from the list below</h3>
-      </Route> */}
-      {/* <Route exact path={`${match.url}/:botID`}> */}
       <YourBotArmy botsDisplay={botsDisplay} />
       <BotCollection bots={bots} onSubmitt={handleClick} />
-      {/* </Route> */}
     </div>
   );
 }

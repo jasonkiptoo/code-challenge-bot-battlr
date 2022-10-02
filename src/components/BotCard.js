@@ -11,9 +11,9 @@ const botTypeClasses = {
 
 function BotCard({ bot, onSubmitt }) {
   const { id, avatar_url, bot_class, catchphrase, health, damage, armor } = bot;
-
   function handleClick() {
     onSubmitt(bot);
+
   }
 
   return (
