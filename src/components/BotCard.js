@@ -9,23 +9,22 @@ const botTypeClasses = {
   Captain: "icon star",
 };
 
-function BotCard({ bot, onSubmitt }) {
+function BotCard({ bot, onSubmitt ,onDelete}) {
   const { id, avatar_url, bot_class, catchphrase, health, damage, armor } = bot;
+ 
   function handleClick() {
     onSubmitt(bot);
-
+  }
+  function handleDelete(e){
+    onDelete(bot);
   }
 
   return (
     <div className="ui column">
-      <div
-        className="ui card"
-        key={id}
-        onClick={() => {
-          handleClick();
-        }}
-      >
-        <div className="image">
+      <div className="ui card" key={id}>
+        <div className="image" onClick={() => {
+                  handleClick();
+                }}>
           <img alt="oh no!" src={avatar_url} />
         </div>
         <div className="content">
@@ -55,9 +54,9 @@ function BotCard({ bot, onSubmitt }) {
             <div className="ui center aligned segment basic">
               <button
                 className="ui mini red button"
-                onClick={() =>
-                  console.log("add code to connect event listener")
-                }
+                onClick={(e) => {
+                  handleDelete(e);
+                }}
               >
                 x
               </button>

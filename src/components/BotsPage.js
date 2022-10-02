@@ -6,10 +6,9 @@ import { Route, Routes, useMatch } from "react-router-dom";
 function BotsPage() {
   const [bots, setBots] = useState([]);
   const [botsDisplay, setBotsDisplay] = useState([]);
-  // const match = useMatch();
-  //start here with your code for step one
+
   // /fetch bots to page
-  const getBotCollection = () => {
+  useEffect(() => {
     fetch("http://localhost:8002/bots")
       .then((res) => {
         return res.json();
@@ -18,21 +17,36 @@ function BotsPage() {
         setBots(data);
         // console.log(data);
       });
-  };
-  useEffect(() => {
-    getBotCollection();
-    // handleBot();
   }, []);
-  function handleClick(data) {
-    const newBots = botsDisplay.slice();
-    newBots.push(data);
-    setBotsDisplay(newBots);
+  ///enlist a bot to your army
+  function handleClick(bot) {
+    const newBots =botsDisplay.slice();
+    newBots.push(bot);
+   console.log(bot.id);
+    {setBotsDisplay(newBots)}
+    
   }
+  const handleDelete = async (bot) => {
+    fetch(`http://localhost:8002/bots/${bot.id}`, {
+      method: "DELETE",
+    })
+      .then((r) => r.json())
+      .then(() => {
+        const updatedArmyList = bots.filter((q) => {
+          return q.id !== bot;
+        });
+        setBots(updatedArmyList);
+      });
+   };
+   const removeBot=(bot)=>{
+        setBotsDisplay(botsDisplay.filter(q => q.id !== bot.id))
+
+   }
 
   return (
     <div>
-      <YourBotArmy botsDisplay={botsDisplay} />
-      <BotCollection bots={bots} onSubmitt={handleClick} />
+      <YourBotArmy bots={botsDisplay} onSubmitt={removeBot} />
+      <BotCollection bots={bots} onSubmitt={handleClick} onDelete={handleDelete}/>
     </div>
   );
 }
